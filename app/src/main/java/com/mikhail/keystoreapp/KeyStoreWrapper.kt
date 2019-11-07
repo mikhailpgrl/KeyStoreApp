@@ -6,12 +6,13 @@ import android.os.Build
 import android.security.keystore.KeyGenParameterSpec
 import android.security.keystore.KeyProperties
 import java.io.File
+import java.io.FileOutputStream
 import java.security.KeyStore
 import javax.crypto.KeyGenerator
 import javax.crypto.SecretKey
 
 
-class KeyStoreWrapper(private val context: Context) {
+class KeyStoreWrapper(context: Context) {
 
     private val keyStore: KeyStore = createAndroidKeyStore()
     private val defaultKeyStoreFile = File(context.filesDir, DEFAULT_KEY_STORE_NAME)
@@ -34,12 +35,12 @@ class KeyStoreWrapper(private val context: Context) {
 
     fun removeAndroidKeyStoreKey(alias: String) = keyStore.deleteEntry(alias)
 
-    fun generateKeyStoreSymmetricKey(keyAlias: String): SecretKey {
+    fun generateKeyStoreSymmetricKey(keyAlias: String, password: String): SecretKey {
         val keyGenerator = KeyGenerator.getInstance("AES")
         val key = keyGenerator.generateKey()
         val keyEntry = KeyStore.SecretKeyEntry(key)
-//        keyStore.setEntry(keyAlias, keyEntry, KeyStore.PasswordProtection(password.toCharArray()))
-//        keyStore.store(FileOutputStream(defaultKeyStoreFile), password.toCharArray())
+        keyStore.setEntry(keyAlias, keyEntry, KeyStore.PasswordProtection(password.toCharArray()))
+        keyStore.store(FileOutputStream(defaultKeyStoreFile), password.toCharArray())
         return key
     }
 

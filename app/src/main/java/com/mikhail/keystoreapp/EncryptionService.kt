@@ -5,15 +5,15 @@ import android.os.Build
 import com.mikhail.keystoreapp.CipherWrapper.Companion.TRANSFORMATION_SYMMETRIC
 import javax.crypto.SecretKey
 
-class EncryptionService(private val context: Context) {
+class EncryptionService(context: Context) {
 
     private val keyStoreWrapper = KeyStoreWrapper(context)
 
-    fun encryptWithAndroidSymmetricKey(keyAlias: String, data: String): String {
+    fun encryptWithAndroidSymmetricKey(keyAlias: String, data: String, password: String): String {
         val key: SecretKey = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             keyStoreWrapper.generateAndroidKeyStoreSymmetricKey(keyAlias)
         } else {
-            keyStoreWrapper.generateKeyStoreSymmetricKey(keyAlias)
+            keyStoreWrapper.generateKeyStoreSymmetricKey(keyAlias, password)
         }
         return CipherWrapper(TRANSFORMATION_SYMMETRIC).encrypt(data, key, true)
     }

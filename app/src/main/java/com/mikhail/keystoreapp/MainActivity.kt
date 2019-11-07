@@ -10,7 +10,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-
     companion object {
         const val KEY_ALIAS = "testKey"
     }
@@ -21,8 +20,7 @@ class MainActivity : AppCompatActivity() {
         ) as KeyguardManager
     }
 
-
-    private val encryptionService by lazy { EncryptionService() }
+    private val encryptionService by lazy { EncryptionService(applicationContext) }
 
     private lateinit var textToEncrypt: String
 
