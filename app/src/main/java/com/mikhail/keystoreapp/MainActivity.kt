@@ -37,7 +37,10 @@ class MainActivity : AppCompatActivity() {
         encryptData.setOnClickListener {
             textToEncrypt = dataToEncrypt.text.toString()
             encryptedData.text =
-                encryptionService.encryptWithAndroidSymmetricKey(KEY_ALIAS, textToEncrypt)
+                encryptionService.encryptWithAndroidSymmetricKey(
+                    KEY_ALIAS,
+                    textToEncrypt
+                )
         }
 
         decryptData.setOnClickListener {
