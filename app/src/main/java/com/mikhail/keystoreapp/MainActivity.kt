@@ -12,6 +12,7 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         const val KEY_ALIAS = "testKey"
+        const val PASSWORD = "password"
     }
 
     private val keyguardManager: KeyguardManager by lazy {
@@ -35,17 +36,19 @@ class MainActivity : AppCompatActivity() {
         encryptData.setOnClickListener {
             textToEncrypt = dataToEncrypt.text.toString()
             encryptedData.text =
-                encryptionService.encryptWithAndroidSymmetricKey(
+                encryptionService.encryptWithSymmetricKey(
                     KEY_ALIAS,
-                    textToEncrypt
+                    textToEncrypt,
+                    PASSWORD
                 )
         }
 
         decryptData.setOnClickListener {
             if (::textToEncrypt.isInitialized)
                 decryptedData.text =
-                    encryptionService.decryptWithAndroidSymmetricKey(
+                    encryptionService.decryptWithSymmetricKey(
                         KEY_ALIAS,
+                        PASSWORD,
                         encryptedData.text.toString()
                     )
 
