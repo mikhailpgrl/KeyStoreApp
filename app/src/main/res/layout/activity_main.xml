@@ -1,53 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
+    android:layout_height="wrap_content"
+    tools:context="com.oodrive.commonkit.sample.MainActivity">
 
-    <EditText
-        android:id="@+id/dataToEncrypt"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="32dp"
-        android:ems="10"
-        android:hint="data to encrypt"
-        android:inputType="textPersonName"
-        android:textSize="16sp" />
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/encryptedData"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="32dp"
-        android:text="encryptedData"
-        android:textSize="16sp" />
+        <EditText
+            android:id="@+id/dataToEncrypt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="32dp"
+            android:ems="10"
+            android:hint="data to encrypt"
+            android:inputType="textPersonName"
+            android:textSize="16sp" />
 
-    <TextView
-        android:id="@+id/decryptedData"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="32dp"
-        android:text="DecryptedData"
-        android:textSize="16sp" />
+        <TextView
+            android:id="@+id/encryptedData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="32dp"
+            android:selectAllOnFocus="true"
+            android:text="DecryptedData"
+            android:textIsSelectable="true"
+            android:textSize="16sp" />
 
-    <Button
-        android:id="@+id/encryptData"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="32dp"
-        android:text="Encrypt" />
+        <EditText
+            android:id="@+id/dataToDecrypt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="32dp"
+            android:hint="dataToDecrypt"
+            android:inputType="text"
+            android:textSize="16sp" />
 
-    <Button
-        android:id="@+id/decryptData"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="32dp"
-        android:text="Decrypt" />
-</androidx.appcompat.widget.LinearLayoutCompat>
+
+        <TextView
+            android:id="@+id/decryptedData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="32dp"
+            android:text="DecryptedData"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/encryptData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="32dp"
+            android:text="Encrypt" />
+
+        <Button
+            android:id="@+id/decryptData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="32dp"
+            android:text="Decrypt" />
+
+
+        <Button
+            android:id="@+id/encryptWithRSA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="32dp"
+            android:text="Encrypt With RSA" />
+    </LinearLayout>
+</ScrollView>

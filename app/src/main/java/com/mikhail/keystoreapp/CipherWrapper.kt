@@ -14,6 +14,8 @@ class CipherWrapper(transformation: String) {
          */
         const val TRANSFORMATION_SYMMETRIC = "AES/CBC/PKCS7Padding"
 
+        const val TRANSFORMATION_ASYMMETRIC = "RSA/ECB/PKCS1Padding"
+
         const val IV_SEPARATOR = "]"
     }
 
@@ -74,5 +76,4 @@ class CipherWrapper(transformation: String) {
         val decodedData = cipher.doFinal(encryptedData)
         return String(decodedData)
     }
-
 }

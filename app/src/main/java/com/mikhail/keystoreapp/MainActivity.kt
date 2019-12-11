@@ -21,7 +21,8 @@ class MainActivity : AppCompatActivity() {
         ) as KeyguardManager
     }
 
-    private val encryptionService by lazy { EncryptionService(applicationContext) }
+    private val keyStoreWrapper by lazy { KeyStoreWrapper(this) }
+    private val encryptionService by lazy { EncryptionService(keyStoreWrapper) }
 
     private lateinit var textToEncrypt: String
 
@@ -29,8 +30,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        if (isDeviceSecure()) {
+        if (!isDeviceSecure()) {
             Toast.makeText(this, "Device is not secured", Toast.LENGTH_SHORT).show()
+        }
+
+        if (hasMarshmallow()) {
+            keyStoreWrapper.generateAndroidKeyStoreSymmetricKey(KEY_ALIAS)
+        } else {
+            keyStoreWrapper.generateKeyStoreSymmetricKey(KEY_ALIAS, PASSWORD)
         }
 
         encryptData.setOnClickListener {
@@ -53,6 +60,16 @@ class MainActivity : AppCompatActivity() {
                     )
 
         }
+
+        // Lance exception pour la clé RSA
+        // javax.crypto.IllegalBlockSizeException: input must be under 256 bytes
+        encryptWithRSA.setOnClickListener {
+            var data = ""
+            (1..10).map { "a" }.forEach { data += it }
+            keyStoreWrapper.generateAndroidKeyStoreAsymmetricKey(KEY_ALIAS)
+            encryptionService.encryptWithAsymmetricKey(KEY_ALIAS, data)
+        }
+
     }
 
     private fun isDeviceSecure(): Boolean =
